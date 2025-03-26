@@ -1,8 +1,20 @@
 from django.contrib.admin import action
 from django.urls import path
 
-from cinema.views import movie_list, movie_detail, GenreList, GenreDetail, ActorList, ActorDetail, CinemaHallList, \
-    CinemaHallDetail
+from cinema.views import GenreList, GenreDetail, ActorList, ActorDetail, CinemaHallList, \
+    CinemaHallDetail, MovieViewSet
+
+movie_list = MovieViewSet.as_view(actions={
+    "get": "list",
+    "post": "create",
+})
+
+movie_detail = MovieViewSet.as_view(actions={
+    "get": "retrieve",
+    "put": "update",
+    "patch": "partial_update",
+    "delete": "destroy"
+})
 
 urlpatterns = [
     path("movies/", movie_list, name="movie-list"),
