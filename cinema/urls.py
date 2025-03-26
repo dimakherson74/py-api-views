@@ -1,6 +1,8 @@
+from django.contrib.admin import action
 from django.urls import path
 
-from cinema.views import movie_list, movie_detail, GenreList, GenreDetail, ActorList, ActorDetail
+from cinema.views import movie_list, movie_detail, GenreList, GenreDetail, ActorList, ActorDetail, CinemaHallList, \
+    CinemaHallDetail
 
 urlpatterns = [
     path("movies/", movie_list, name="movie-list"),
@@ -9,6 +11,20 @@ urlpatterns = [
     path("genre/<int:pk>/", GenreDetail.as_view(), name="genre-detail"),
     path("actor/", ActorList.as_view(), name="actor-list"),
     path("actor/<int:pk>/", ActorDetail.as_view(), name="actor-detail"),
+    path("cinemahall/", CinemaHallList.as_view(
+        actions={
+            "get": "list",
+            "post": "create",
+        }
+    ), name="cinemahall-list"),
+    path("cinemahall/<int:pk>/", CinemaHallDetail.as_view(
+        actions={
+            "get": "retrieve",
+            "put": "update",
+            "patch": "partial_update",
+            "delete": "destroy"
+        }
+    ), name="cinemahall-detail"),
 ]
 
 app_name = "cinema"

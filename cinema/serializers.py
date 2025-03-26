@@ -55,7 +55,7 @@ class ActorSerializer(serializers.Serializer):
 class CinemaHallSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(max_length=255)
-    rows = serializers.IntegerField(min_value=1, max_value=15)
+    rows = serializers.IntegerField(min_value=1, max_value=30)
     seats_in_row = serializers.IntegerField(min_value=1, max_value=35)
 
     def create(self, validated_data):
